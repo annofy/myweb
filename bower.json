@@ -1,0 +1,23 @@
+{
+  "name": "blogv3",
+  "description": "version of 3",
+  "main": "app.js",
+  "authors": [
+    "zhenglfsir@gmail.com"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "blog"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "semantic": "semantic-ui#^2.2.10"
+  }
+}

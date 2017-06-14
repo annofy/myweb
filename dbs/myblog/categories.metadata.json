@@ -1,0 +1,1 @@
+{ "indexes" : [ { "v" : 1, "key" : { "_id" : 1 }, "ns" : "myblog.categories", "name" : "_id_" }, { "v" : 1, "key" : { "name" : 1, "_id" : -1 }, "ns" : "myblog.categories", "name" : "name_1__id_-1" } ] }

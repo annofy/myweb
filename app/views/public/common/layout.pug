@@ -1,0 +1,12 @@
+html
+  head
+    title #{title} | by zheng
+    block styles
+  body
+    block header
+    block main
+    block footer
+    block scripts
+      script(src='/scripts/bundle.js')
+    if process.env.NODE_ENV === 'development'
+      script(src='/reload/reload.js')

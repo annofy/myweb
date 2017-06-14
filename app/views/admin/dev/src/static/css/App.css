@@ -1,0 +1,104 @@
+html, body, #root {
+    height: 100%;
+    width: 100%;
+}
+
+#zlf-ant-layout .trigger {
+    font-size: 18px;
+    line-height: 64px;
+    padding: 0 16px;
+    cursor: pointer;
+    transition: color .3s;
+}
+
+#zlf-ant-layout {
+    height: 100%;
+}
+
+#zlf-ant-layout .trigger:hover {
+    color: #108ee9;
+}
+
+#zlf-ant-layout .logo {
+    height: 32px;
+    margin: 16px;
+}
+
+#zlf-ant-layout .logo img {
+    width: 50px;
+}
+
+@keyframes roll {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+#zlf-ant-layout .zlf-logo-text {
+    line-height: 34px;
+    margin-right: 16px;
+    font-weight: bold;
+    font-size: 14px;
+    animation: logotext 1s ease;
+    float: right;
+}
+
+@keyframes logotext {
+    0% {
+        opacity: 0;
+        float: none;
+    }
+    80% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+#zlf-ant-layout .ant-layout-sider-collapsed .anticon {
+    font-size: 16px;
+}
+
+#zlf-ant-layout .ant-layout-sider-collapsed .nav-text {
+    display: none;
+}
+
+#zlf-ant-layout .ant-layout-sider-collapsed .zlf-logo-text {
+    display: none;
+    float: none;
+}
+
+#zlf-ant-layout .ant-layout-sider-collapsed .logo {
+    margin: 16px 8px;
+}
+
+#zlf-ant-layout .ant-layout-sider-collapsed .logo img {
+    animation: roll 10s infinite linear;
+}
+
+.ql-toolbar {
+    border-radius: 4px 4px 0 0;
+}
+.quill .ql-toolbar.ql-snow {
+    padding: 4px;
+}
+.quill .ql-snow .ql-picker {
+    height: 34px;
+}
+
+.zlf-quill-editor {
+    min-height: 240px;
+    max-height: 240px;
+    overflow-y: auto;
+    border-radius: 0 0 4px 4px;
+}
+
+.zlf-main {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+

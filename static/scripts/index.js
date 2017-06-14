@@ -1,0 +1,6 @@
+require('../styles/default.css')
+require('../libs/semantic/dist/semantic.min.css')
+require('../styles/common.less')
+require('../libs/semantic/dist/semantic.min')
+require('./common')
+require('../tips')
