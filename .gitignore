@@ -4,4 +4,4 @@ package-lock.json
 .idea
 .idea/inspectionProfiles/*
 .idea/dictionaries/*
-
+.DS_Store
