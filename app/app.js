@@ -24,8 +24,7 @@ mongoose.connect(dbUrl).then(
     utils.logs('mongoose', '连接成功')
   },
   err => {
-    utils.error('mongoose', err)
-    throw new Error('数据库连接异常', err)
+    utils.error('mongoose', err.message)
   }
 )
 if (isDev) {

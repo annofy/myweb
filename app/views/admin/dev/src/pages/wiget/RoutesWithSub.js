@@ -1,5 +1,5 @@
 import React from 'react'
-import {Route} from 'react-router-dom'
+import {Route, Redirect} from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 export default class RoutesWithSub extends React.Component {
@@ -10,9 +10,12 @@ export default class RoutesWithSub extends React.Component {
 
   render() {
     const {route} = this.props;
-    return <Route path={this.props.path} render={props => {
-      console.log('[routes props]', props, route)
-      return <route.component {...props} routes={route.routes}/>
+    return <Route path={route.path} exact={route.exect} render={props => {
+      if (route.redirect) {
+        return <Redirect to={route.redirect}/>
+      } else {
+        return <route.component {...props} routes={route.routes}/>
+      }
     }}/>
   }
 }

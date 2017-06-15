@@ -60,7 +60,7 @@ export default class Articles extends React.Component {
 
   onAdd() {
     const {history} = this.props
-    history.push('/articleEdit')
+    history.push('/home/article/edit')
   }
 
   render() {

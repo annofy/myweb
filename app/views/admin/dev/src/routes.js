@@ -1,36 +1,49 @@
+import Main from '@pages/Main'
 import Articles from '@pages/articles/Article'
 import ArticleEdit from '@pages/articles/ArticleEdit'
 import Category from '@pages/category/Category'
 import CategoryEdit from '@pages/category/CategoryEdit'
 import Expe from '@pages/experience/Expe'
 import Login from '@pages/Login'
+import Register from '@pages/Register'
+
+
 export default [
   {
     path: '/',
-  },
-  // {
-  //   path: '/login',
-  //   exect: true,
-  //   component: Login
-  // },
-  {
-    path: '/article',
-    component: Articles
+    redirect: '/login',
+    exect: true
   },
   {
-    path: '/articleEdit',
-    component: ArticleEdit
+    path: '/home',
+    component: Main,
+    routes: [
+      {
+        path: '/home/article',
+        exect: true,
+        component: Articles
+      },
+      {
+        path: '/home/article/edit',
+        component: ArticleEdit
+      },
+      {
+        path: '/home/category',
+        exect: true,
+        component: Category
+      },
+      {
+        path: '/home/category/edit',
+        component: CategoryEdit
+      }
+    ]
   },
   {
-    path: '/category',
-    component: Category
+    path: '/login',
+    component: Login
   },
   {
-    path: '/categoryEdit',
-    component: CategoryEdit
-  },
-  {
-    path: '/experience',
-    component: Expe
+    path: '/register',
+    component: Register
   }
 ]

@@ -44,7 +44,7 @@ export default class Category extends React.Component {
 
   toEdit(data) {
     const {history} = this.props
-    history.push('/categoryEdit', {action: 'edit', data})
+    history.push('/home/category/edit', {action: 'edit', data})
   }
 
   toDelete(data, index) {
@@ -108,7 +108,7 @@ export default class Category extends React.Component {
 
   addCategory() {
     const {history} = this.props
-    history.push('/categoryEdit')
+    history.push('/home/category/edit')
   }
 
   batchDelete() {

@@ -5,6 +5,8 @@ import LogoImg from '@static/img/logo.svg'
 import routes from '../routes'
 import Login from './Login'
 import Main from './Main'
+import RoutesWithSub from './wiget/RoutesWithSub'
+
 export default class WebLayout extends React.Component {
 
   constructor(props) {
@@ -17,18 +19,9 @@ export default class WebLayout extends React.Component {
   render() {
     return (
       <Layout id="zlf-ant-layout">
-        <Route path="/" render={(props) => {
-          if (this.state.isLogin) {
-            console.log('#', props)
-            return <Main {...props}/>
-          } else {
-            console.log('#', props)
-            return <Login/>
-          }
-        }}/>
-        <Route path="/login" render={() => {
-          return <Redirect to={{pathname: '/', search: "isLogin=true", hash: 'login'}} push={false}/>
-        }}/>
+        {
+          routes.map((route, index) => <RoutesWithSub key={index} route={route}/>)
+        }
       </Layout>
     )
   }

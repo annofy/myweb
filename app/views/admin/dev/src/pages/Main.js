@@ -2,7 +2,7 @@ import React from 'react'
 import {Route, Link, Prompt, Redirect} from 'react-router-dom'
 import {Layout, Menu, Icon} from 'antd';
 import LogoImg from '@static/img/logo.svg'
-import routes from '../routes'
+import RoutesWithSub from './wiget/RoutesWithSub'
 const {Header, Sider, Content, Footer} = Layout
 
 export default class Main extends React.Component {
@@ -24,6 +24,7 @@ export default class Main extends React.Component {
   }
 
   render() {
+    const {routes} = this.props
     return (
       <Layout id="zlf-ant-layout">
         <Sider
@@ -35,14 +36,14 @@ export default class Main extends React.Component {
             <img src={LogoImg} alt=""/><span className="zlf-logo-text">OUR OUR OUR</span>
           </div>
           <Menu mode="inline" defaultSelectedKeys={['/articles']}>
-            <Menu.Item key="/article">
-              <Link to="/article">
+            <Menu.Item key="/home/article">
+              <Link to="/home/article">
                 <Icon type="book"/>
                 <span className="nav-text">文章</span>
               </Link>
             </Menu.Item>
-            <Menu.Item key="/expe">
-              <Link to='/experience'>
+            <Menu.Item key="/home/expe">
+              <Link to='/home/experience'>
                 <Icon type="video-camera"/>
                 <span className="nav-text">经历</span>
               </Link>
@@ -52,7 +53,7 @@ export default class Main extends React.Component {
               <span className="nav-text">图片</span>
             </Menu.Item>
             <Menu.Item>
-              <Link to="/category">
+              <Link to="/home/category">
                 <Icon type="tags-o"/>
                 <span className="nav-text">类别</span>
               </Link>
@@ -74,10 +75,11 @@ export default class Main extends React.Component {
                * location Object
                * action 'PUSH', 'POP'等
                */
+
               console.log('#拦截了' + action + '操作跳转', location)
             }}/>
             {
-              routes.map(route => <Route key={route.path} path={route.path} component={route.component}/>)
+              routes.map((route, index) => <RoutesWithSub key={index} route={route}/>)
             }
           </Content>
           <Footer style={{padding: '16px 50px'}}>design ©2017 create by longfan.zheng</Footer>

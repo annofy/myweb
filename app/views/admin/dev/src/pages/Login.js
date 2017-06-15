@@ -7,6 +7,17 @@ class Login extends React.Component {
 
   constructor(props) {
     super(props)
+    this.state = {
+      isLogin: true
+    }
+  }
+
+  componentWillMount() {
+    const {history} = this.props
+    if (this.state.isLogin) {
+      console.log('#', '已经跳转')
+      history.push('/home')
+    }
   }
 
   handleSubmit(event) {
