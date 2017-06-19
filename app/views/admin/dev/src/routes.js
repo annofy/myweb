@@ -1,6 +1,7 @@
 import Main from '@pages/Main'
 import Articles from '@pages/articles/Article'
 import ArticleEdit from '@pages/articles/ArticleEdit'
+import ArticleDetail from '@pages/articles/ArticleDetail'
 import Category from '@pages/category/Category'
 import CategoryEdit from '@pages/category/CategoryEdit'
 import Expe from '@pages/experience/Expe'
@@ -26,6 +27,10 @@ export default [
       {
         path: '/home/article/edit',
         component: ArticleEdit
+      },
+      {
+        path: '/home/article/detail',
+        component: ArticleDetail
       },
       {
         path: '/home/category',

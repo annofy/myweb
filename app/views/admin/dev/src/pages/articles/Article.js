@@ -11,33 +11,49 @@ export default class Articles extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      data: [{
-        _id: 1,
-        title: 'Javascript的进阶记录',
-        category: 'Javascript',
-        createTime: '2017.05.04 14:32',
-        updateTime: '2017.06.04 21:02',
-        other: '其他数据'
-      }],
+      data: [],
       columns: [{
         title: '标题',
         dataIndex: 'title',
-        render: (row, data) => {
-          return <TextBtn to="/" type="text" text={data.title}/>
+        render: (text, data) => {
+          return <TextBtn type="text" text={text} onClick={this.handleView.bind(this, data)}/>
         }
       }, {
         title: '类别',
-        dataIndex: 'category',
+        dataIndex: 'categoryId',
+        render(text, data) {
+          return <span>
+            {
+              text.map((cat, index) => {
+                if (index + 1 === text.length) {
+                  return <span key={index}>{cat.name}</span>
+                }
+                else {
+                  return <span key={index}>{cat.name} | </span>
+                }
+              })
+            }
+          </span>
+        }
       }, {
         title: '发布时间',
-        dataIndex: 'createTime',
+        dataIndex: 'meta.createTime',
+        render(text, data) {
+          return <span>{moment(text).format(process.env.formatText)}</span>
+        }
       }, {
         title: '更新时间',
-        dataIndex: 'updateTime',
+        dataIndex: 'meta.updateTime',
+        render(text, data) {
+          return <span>{moment(text).format(process.env.formatText)}</span>
+        }
       }, {
         title: '操作',
         render: (row, data) => {
-          return <TextBtn to="/" type="text" text="编辑"/>
+          return <span>
+            <TextBtn to="/" type="text" text="编辑"/>
+            <TextBtn to="/" type="text" text="删除"/>
+          </span>
         }
       }],
       tableOptions: {
@@ -51,11 +67,19 @@ export default class Articles extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({
-      tableOptions: {
-        loading: false
-      }
-    })
+    axios.get('/admin/articles')
+      .then(res => {
+        this.setState({
+          tableOptions: {
+            loading: false,
+          },
+          data: res.data
+        })
+      })
+  }
+
+  handleView(data) {
+    this.props.history.push('/home/admin/article/detail', data)
   }
 
   onAdd() {

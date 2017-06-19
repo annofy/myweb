@@ -8,7 +8,7 @@ const default_row_selection = {
 const default_pagination = {
   total: 0,
   showTotal: (total) => {
-    return `当前共${total}页`
+    return `当前共${total}项`
   },
   pageSize: 10,
   current: 0

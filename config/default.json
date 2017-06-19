@@ -4,7 +4,13 @@
     "sk": "rwry3kHC8ITKgi1Tpy5p9XNChX5YudYmKC3Ar-09"
   },
   "db": {
-    "url": "mongodb://localhost/blogv3"
+    "url": "mongodb://localhost/blogv3",
+    "options": {
+      "server": {
+        "reconnectTries": 200,
+        "auto_reconnect": true
+      }
+    }
   },
   "crypto": {
     "salt": "longfan.zheng",

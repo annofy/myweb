@@ -3,7 +3,9 @@ const express = require('express'),
   Category = require('../../models/CategoryModel');
 
 router.get('/', (req, res) => {
-  Category.getCatetories().then(cates => {
+  let start = req.query.start - 0,
+    pageSize = req.query.pageSize - 0;
+  Category.getCatetories(start, pageSize).then(cates => {
     res.json({
       ok: true,
       data: cates,
@@ -20,6 +22,18 @@ router.post('/', (req, res) => {
         ok: true,
         data: cate,
         reason: '添加成功'
+      })
+    })
+})
+
+router.get('/validate', (req, res) => {
+  let name = req.query.name
+  Category.getCategoryByName(name)
+    .then(cat => {
+      res.json({
+        ok: true,
+        data: cat,
+        reason: ''
       })
     })
 })

@@ -48,6 +48,10 @@ export default class Main extends React.Component {
                 <span className="nav-text">经历</span>
               </Link>
             </Menu.Item>
+            <Menu.SubMenu key="sub2" title={<span><Icon type="appstore"/><span className="nav-text">记录</span></span>}>
+              <Menu.Item key="5">软件记录</Menu.Item>
+              <Menu.Item key="6">模块记录</Menu.Item>
+            </Menu.SubMenu>
             <Menu.Item key="3">
               <Icon type="upload"/>
               <span className="nav-text">图片</span>

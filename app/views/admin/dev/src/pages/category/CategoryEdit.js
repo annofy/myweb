@@ -12,6 +12,7 @@ const formTailLayout = {
   labelCol: {span: 2},
   wrapperCol: {span: 8, offset: 2},
 };
+let timeout;
 
 class CategoryEdit extends React.Component {
 
@@ -68,7 +69,7 @@ class CategoryEdit extends React.Component {
             <Icon type="book"/>
           </Breadcrumb.Item>
           <Breadcrumb.Item>
-            <Link to="/category">列表</Link>
+            <Link to="/home/category">列表</Link>
           </Breadcrumb.Item>
           <Breadcrumb.Item>添加分类</Breadcrumb.Item>
         </Breadcrumb>
@@ -79,7 +80,31 @@ class CategoryEdit extends React.Component {
                 getFieldDecorator('name', {
                   rules: [{
                     required: true,
-                    message: '请输入正确的分类名称'
+                    whitespace: true,
+                    validator: (rule, value, callback) => {
+                      // 简单防抖动
+                      if (timeout) {
+                        clearTimeout(timeout)
+                        timeout = null
+                      }
+                      timeout = setTimeout(() => {
+                        if (value.length !== 0) {
+                          axios.get('/admin/category/validate', {
+                            params: {
+                              name: value
+                            }
+                          }).then(res => {
+                            if (res.ok && res.data) {
+                              callback(new Error('名称已存在,换个名字呗'))
+                            } else {
+                              callback()
+                            }
+                          })
+                        } else {
+                          callback(new Error('不能为空'))
+                        }
+                      }, 300)
+                    }
                   }]
                 })(
                   <Input placeholder="名称"/>
@@ -91,7 +116,8 @@ class CategoryEdit extends React.Component {
                 getFieldDecorator('desc', {
                   rules: [{
                     required: true,
-                    message: '随便输入点啥'
+                    message: '随便输入点啥',
+                    whitespace: ''
                   }]
                 })(
                   <Input placeholder="名称" type="textarea" rows={2}/>

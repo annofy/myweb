@@ -22,33 +22,30 @@ class ArticleEdit extends React.Component {
     this.state = {
       form: {
         content: {},
+        html: '',
         txt: '',
         title: '',
+        desc: '',
         categoryId: ''
       },
       categories: []
     }
   }
 
-  editorContents(delta) {
+  editorContents(delta, html, txt) {
     this.setState({
-      form: {...this.state.form, content: delta}
-    })
-  }
-
-  editorText(txt) {
-    this.setState({
-      form: {...this.state.form, txt}
+      form: {...this.state.form, content: delta, txt, html}
     })
   }
 
   handleSubmit() {
+    const {history} = this.props
     this.props.form.validateFields((err, values) => {
       if (!err) {
         let form = {...this.state.form, ...values}
-        axios.post('/admin/article', {...form})
+        axios.post('/admin/articles', {...form})
           .then(res => {
-            console.log('[res]', res)
+            history.goBack()
           })
       }
     })
@@ -78,7 +75,7 @@ class ArticleEdit extends React.Component {
             <Icon type="book"/>
           </Breadcrumb.Item>
           <Breadcrumb.Item>
-            <Link to="/article">列表</Link>
+            <Link to="/home/article">列表</Link>
           </Breadcrumb.Item>
           <Breadcrumb.Item>添加</Breadcrumb.Item>
         </Breadcrumb>
@@ -104,7 +101,7 @@ class ArticleEdit extends React.Component {
                     message: '请选择分类'
                   }]
                 })(
-                  <Select>
+                  <Select mode="multiple" placeholder="请选择分类">
                     {
                       this.state.categories.map((cv, index) => <Option key={index} value={cv._id}>{cv.name}</Option>)
                     }
@@ -125,7 +122,7 @@ class ArticleEdit extends React.Component {
               }
             </FormItem>
             <FormItem label="内容" labelCol={{span: 2}} wrapperCol={{span: 18}}>
-              <Editor editorContents={this.editorContents.bind(this)} editorText={this.editorText.bind(this)}/>
+              <Editor editorContents={this.editorContents.bind(this)}/>
             </FormItem>
             <FormItem {...formTailLayout}>
               <Button type="primary" onClick={this.handleSubmit.bind(this)}>添加</Button>

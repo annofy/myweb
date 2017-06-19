@@ -16,7 +16,7 @@ export default class TextBtn extends React.Component {
   get Btn() {
     switch (this.props.type) {
       case 'text':
-        return ~~this.props.to.length ? <Link style={styles.btn} to="">{this.props.text}</Link> :
+        return ~~this.props.to.length ? <Link style={styles.btn} to={this.props.to}>{this.props.text}</Link> :
           <a style={styles.btn} href="javascript:;" onClick={this.props.onClick}>{this.props.text}</a>
       default:
         return <Button style={styles.btn} type={this.props.type} size={this.props.size}

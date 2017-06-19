@@ -246,9 +246,9 @@ module.exports = {
     }),
     new webpack.ProvidePlugin({
       axios: 'axios',
-      React: 'react',
       moment: 'moment',
-      PropTypes: 'prop-types'
+      PropTypes: 'prop-types',
+      queryString: 'query-string'
     }),
     // Makes some environment variables available to the JS code, for example:
     // if (process.env.NODE_ENV === 'production') { ... }. See `./env.js`.

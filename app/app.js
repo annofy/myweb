@@ -7,7 +7,7 @@ const express = require('express'),
   routes = require('./routes'),
   isDev = process.env.NODE_ENV !== 'production',
   port = process.env.PORT || config.get('port'),
-  dbUrl = config.get('db.url'),
+  dbConfig = config.get('db'),
   utils = require('./utils/utils');
 
 
@@ -19,7 +19,7 @@ app.use(bodyParse.urlencoded({extended: false}))
 app.use(bodyParse.json())
 // 设置mongoose
 mongoose.Promise = global.Promise
-mongoose.connect(dbUrl).then(
+const cnn = mongoose.connect(dbConfig.url, dbConfig.options).then(
   () => {
     utils.logs('mongoose', '连接成功')
   },
@@ -27,7 +27,16 @@ mongoose.connect(dbUrl).then(
     utils.error('mongoose', err.message)
   }
 )
+
 if (isDev) {
+  // 错误处理
+  app.use((err, req, res, next) => {
+    res.status(err.status || 500)
+    res.render('err', {
+      message: err.message,
+      error: error
+    })
+  })
   // webpack 配置
   const webpack = require('webpack'),
     webpackDevMiddleware = require('webpack-dev-middleware'),
@@ -53,7 +62,7 @@ if (isDev) {
   // 创建文件监视器
   watch.createMonitor(__dirname + '/views', {
     interval: 1,
-    ignoreDirectoryPattern: /\/dev\/[.]+/
+    ignoreDirectoryPattern: /\.js$/
   }, monitor => {
     monitor.files[__dirname + '/views/**']
     monitor.on('changed', (f, curr, prev) => {

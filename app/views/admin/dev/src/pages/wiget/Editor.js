@@ -5,8 +5,7 @@ import PropTypes from 'prop-types'
 export default class Editor extends React.Component {
 
   handleChange(html) {
-    this.props.editorContents(this.editor.getContents())
-    this.props.editorText(this.editor.getText())
+    this.props.editorContents(this.editor.getContents(), html, this.editor.getText())
   }
 
   componentDidMount() {

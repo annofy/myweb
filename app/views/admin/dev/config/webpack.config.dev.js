@@ -237,9 +237,9 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.ProvidePlugin({
       axios: 'axios',
-      React: 'react',
       moment: 'moment',
-      PropTypes: 'prop-types'
+      PropTypes: 'prop-types',
+      queryString: 'query-string'
     }),
 
     // Watcher doesn't work well if you mistype casing in a path so we use

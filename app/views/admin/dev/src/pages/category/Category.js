@@ -38,7 +38,11 @@ export default class Category extends React.Component {
         }
       }],
       tableOptions: {},
-      rowKeys: []
+      rowKeys: [],
+      pagination: {
+        start: 0,
+        pageSize: 10
+      }
     }
   }
 
@@ -92,17 +96,16 @@ export default class Category extends React.Component {
   }
 
   fetchList() {
-    axios.get('/admin/category')
-      .then(res => {
-        if (res.ok) {
-          this.setState({
-            tableOptions: {
-              loading: false,
-            },
-            data: res.data,
-          })
-        }
-      })
+    axios.get('/admin/category', {params: {...this.state.pagination}}).then(res => {
+      if (res.ok) {
+        this.setState({
+          tableOptions: {
+            loading: false,
+          },
+          data: res.data,
+        })
+      }
+    })
   }
 
 
@@ -117,6 +120,12 @@ export default class Category extends React.Component {
     } else {
       this.deleteAction(this.state.rowKeys)
     }
+  }
+
+  onChange(pagination) {
+    this.setState({
+      pagination: pagination
+    })
   }
 
 
@@ -136,7 +145,8 @@ export default class Category extends React.Component {
             }
           }} tableOptions={this.state.tableOptions}>
             <TextBtn text="添加" onClick={this.addCategory.bind(this)}/>
-            <Popconfirm title="确认删除所有选中分类嘛?" onConfirm={this.batchDelete.bind(this)} okText="确认" cancelText="取消">
+            <Popconfirm title="确认删除所有选中分类嘛?" onChange={this.onChange.bind(this)} onConfirm={this.batchDelete.bind(this)}
+                        okText="确认" cancelText="取消">
               <TextBtn text="删除"/>
             </Popconfirm>
           </FuncTable>
