@@ -1,5 +1,5 @@
 import React from 'react'
-import {Route, Link, Prompt, Redirect} from 'react-router-dom'
+import {Route, Link, Redirect} from 'react-router-dom'
 import {Layout, Menu, Icon} from 'antd';
 import LogoImg from '@static/img/logo.svg'
 import RoutesWithSub from './wiget/RoutesWithSub'
@@ -49,8 +49,12 @@ export default class Main extends React.Component {
               </Link>
             </Menu.Item>
             <Menu.SubMenu key="sub2" title={<span><Icon type="appstore"/><span className="nav-text">记录</span></span>}>
-              <Menu.Item key="5">软件记录</Menu.Item>
-              <Menu.Item key="6">模块记录</Menu.Item>
+              <Menu.Item key="5">
+                <Link to="/home/record/soft">软件记录</Link>
+              </Menu.Item>
+              <Menu.Item key="6">
+                <Link to="/home/record/module">模块记录</Link>
+              </Menu.Item>
             </Menu.SubMenu>
             <Menu.Item key="3">
               <Icon type="upload"/>
@@ -74,14 +78,6 @@ export default class Main extends React.Component {
             />
           </Header>
           <Content style={{margin: '24px 16px', padding: 16, background: '#fff', minHeight: 280}}>
-            <Prompt when={true} message={(location, action) => {
-              /*
-               * location Object
-               * action 'PUSH', 'POP'等
-               */
-
-              console.log('#拦截了' + action + '操作跳转', location)
-            }}/>
             {
               routes.map((route, index) => <RoutesWithSub key={index} route={route}/>)
             }

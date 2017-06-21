@@ -4,6 +4,8 @@ const express = require('express'),
   mongoose = require('mongoose'),
   margan = require('morgan'),
   path = require('path'),
+  cookieParser = require('cookie-parser'),
+  session = require('express-session'),
   routes = require('./routes'),
   isDev = process.env.NODE_ENV !== 'production',
   port = process.env.PORT || config.get('port'),
@@ -17,6 +19,13 @@ app.set('view engine', 'pug')
 app.use(margan('dev'))
 app.use(bodyParse.urlencoded({extended: false}))
 app.use(bodyParse.json())
+app.use(cookieParser()) // 使用cookie
+app.use(session({
+  secret: 'longfan.zheng',
+  maxAge: 1 * 60 * 1000,
+  resave: true,
+  saveUninitialized: true
+})) // 使用session
 // 设置mongoose
 mongoose.Promise = global.Promise
 const cnn = mongoose.connect(dbConfig.url, dbConfig.options).then(

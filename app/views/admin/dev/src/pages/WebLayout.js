@@ -19,6 +19,14 @@ export default class WebLayout extends React.Component {
   render() {
     return (
       <Layout id="zlf-ant-layout">
+        <Prompt message={(location, action) => {
+          /*
+           * location Object
+           * action 'PUSH', 'POP'等
+           */
+
+          console.log('#拦截了' + action + '操作跳转', location)
+        }}/>
         {
           routes.map((route, index) => <RoutesWithSub key={index} route={route}/>)
         }

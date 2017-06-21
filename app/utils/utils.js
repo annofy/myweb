@@ -66,12 +66,35 @@ class Utils {
     }
   }
 
+  /**
+   * 清除module 缓冲
+   * @param modulePath
+   */
   static cleanCache(modulePath) {
     const module = require.cache[modulePath]
     if (module.parent) {
       module.parent.children.splice(module.parent.children.indexOf(module), 1)
     }
     require.cache[modulePath] = null
+  }
+
+  /**
+   * 判断是否是管理员
+   * @param req
+   * @param res
+   * @param next
+   */
+  static isAdmin(req, res, next) {
+    if (req.session && req.session._uname) {
+      next()
+    } else {
+      res.json({
+        ok: false,
+        data: [],
+        reason: '请求错误',
+        redirect: true
+      })
+    }
   }
 
 }

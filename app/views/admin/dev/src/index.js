@@ -6,6 +6,7 @@ import registerServiceWorker from './registerServiceWorker';
 import 'nprogress/nprogress.css'
 import NProgress from 'nprogress'
 import {message} from 'antd'
+import {Redirect} from 'react-router-dom'
 
 axios.interceptors.request.use(req => {
   console.log('[#] 发起了请求')
@@ -21,6 +22,8 @@ axios.interceptors.response.use(res => {
   console.log('[#] 得到一个响应')
   if (res.data.ok && res.data.reason) {
     message.success(res.data.reason)
+  } else if (res.data.redirect) {
+    location.href = '/login'
   }
   NProgress.done()
   return res.data

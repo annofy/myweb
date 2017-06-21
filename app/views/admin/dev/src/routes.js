@@ -7,6 +7,8 @@ import CategoryEdit from '@pages/category/CategoryEdit'
 import Expe from '@pages/experience/Expe'
 import Login from '@pages/Login'
 import Register from '@pages/Register'
+import Software from '@pages/records/Software'
+import NodeModule from '@pages/records/NodeModule'
 
 
 export default [
@@ -40,6 +42,14 @@ export default [
       {
         path: '/home/category/edit',
         component: CategoryEdit
+      },
+      {
+        path: '/home/record/soft',
+        component: Software
+      },
+      {
+        path: '/home/record/module',
+        component: NodeModule
       }
     ]
   },
