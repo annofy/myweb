@@ -23,23 +23,28 @@ class SearchBarForm extends React.Component {
   render() {
     const {getFieldDecorator} = this.props.form
     return (
-      <Form layout="inline" style={{marginTop: 16}}>
-        {
-          this.props.fields && this.props.fields.map((cv, index) => {
-            return <FormItem key={index} label={cv.label} colon={false}>
-              {
-                getFieldDecorator(cv.fieldName)(
-                  <Input placeholder={'输入' + cv.label}/>
-                )
-              }
-            </FormItem>
-          })
-        }
-        <FormItem>
-          <TextBtn type="primary" onClick={this.handleSearch.bind(this)} text="搜索"/>
-          <TextBtn onClick={this.handleReset.bind(this)} text="清空"/>
-        </FormItem>
-      </Form>
+      <div style={{overflow: 'hidden', marginBottom: 16}}>
+        <div style={{float: 'left'}}>
+          {this.props.children}
+        </div>
+        <Form layout="inline" style={{float: 'right'}}>
+          {
+            this.props.fields && this.props.fields.map((cv, index) => {
+              return <FormItem key={index} label={cv.label} colon={false}>
+                {
+                  getFieldDecorator(cv.fieldName)(
+                    <Input placeholder={'输入' + cv.label}/>
+                  )
+                }
+              </FormItem>
+            })
+          }
+          <FormItem>
+            <TextBtn type="primary" onClick={this.handleSearch.bind(this)} text="搜索"/>
+            <TextBtn onClick={this.handleReset.bind(this)} text="清空"/>
+          </FormItem>
+        </Form>
+      </div>
     )
   }
 }

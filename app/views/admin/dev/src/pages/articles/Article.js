@@ -97,13 +97,12 @@ export default class Articles extends React.Component {
           <Breadcrumb.Item>列表</Breadcrumb.Item>
         </Breadcrumb>
         <MainContent>
-          <div>
-            <TextBtn text="添加" onClick={this.onAdd.bind(this)}/>
-            <TextBtn text="分类"/>
-            <TextBtn text="删除"/>
-          </div>
           <FuncTable data={this.state.data} tableOptions={this.state.tableOptions} columns={this.state.columns}>
-            <SearchBarForm fields={this.state.fields}/>
+            <SearchBarForm fields={this.state.fields}>
+              <TextBtn text="添加" onClick={this.onAdd.bind(this)}/>
+              <TextBtn text="分类"/>
+              <TextBtn text="删除"/>
+            </SearchBarForm>
           </FuncTable>
         </MainContent>
       </div>
