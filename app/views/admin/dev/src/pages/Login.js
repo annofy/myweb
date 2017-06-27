@@ -36,6 +36,19 @@ class Login extends React.Component {
           .then(res => {
             if (res.ok) {
               this.props.history.push('/home')
+            } else {
+              this.props.form.setFields({
+                name: {
+                  errors: [new Error('')]
+                },
+                password: {
+                  errors: [new Error('')]
+                }
+              })
+              message.error('账号或者密码错误')
+              this.setState({
+                loading: false
+              })
             }
           }).catch(err => {
           message.error('账号或者密码错误')

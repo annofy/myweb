@@ -1,8 +1,9 @@
 import React from 'react'
-import {Breadcrumb, Icon, message, Popconfirm} from 'antd'
+import {message, Popconfirm} from 'antd'
 import MainContent from '@pages/wiget/MainContent'
 import FuncTable from '@pages/wiget/FuncTable'
 import TextBtn from '@pages/wiget/TextBtn'
+import BreadHeader from '@pages/wiget/BreadHeader'
 
 export default class Category extends React.Component {
 
@@ -132,12 +133,7 @@ export default class Category extends React.Component {
   render() {
     return (
       <div>
-        <Breadcrumb separator=">">
-          <Breadcrumb.Item>
-            <Icon type="tags-o"/>
-          </Breadcrumb.Item>
-          <Breadcrumb.Item>分类</Breadcrumb.Item>
-        </Breadcrumb>
+        <BreadHeader items={[{icon: 'tags-o'}, {title: '分类'}]}/>
         <MainContent>
           <FuncTable data={this.state.data} columns={this.state.columns} rowSelection={{
             onChange: (rowKeys, rows) => {

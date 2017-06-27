@@ -9,6 +9,9 @@ const mongoose = require('mongoose'),
   ModulesScheam = new Schema({
     moduleName: String,
     moduleDes: String,
+    developer: String,
+    npmUrl: String,
+    github: String,
     isAvailable: {
       type: Boolean,
       default: true

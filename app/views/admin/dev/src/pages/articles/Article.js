@@ -1,7 +1,8 @@
 import React from 'react'
-import {Breadcrumb, Icon, Form, Input} from 'antd'
+import {Form, Input} from 'antd'
 import FuncTable from '@pages/wiget/FuncTable'
 import MainContent from '@pages/wiget/MainContent'
+import BreadHeader from '@pages/wiget/BreadHeader'
 import TextBtn from '@pages/wiget/TextBtn'
 import SearchBarForm from '@pages/wiget/SearchBarForm'
 
@@ -90,12 +91,7 @@ export default class Articles extends React.Component {
   render() {
     return (
       <div>
-        <Breadcrumb separator=">">
-          <Breadcrumb.Item>
-            <Icon type="book"/>
-          </Breadcrumb.Item>
-          <Breadcrumb.Item>列表</Breadcrumb.Item>
-        </Breadcrumb>
+        <BreadHeader items={[{icon: 'book'}, {title: '列表'}]}/>
         <MainContent>
           <FuncTable data={this.state.data} tableOptions={this.state.tableOptions} columns={this.state.columns}>
             <SearchBarForm fields={this.state.fields}>

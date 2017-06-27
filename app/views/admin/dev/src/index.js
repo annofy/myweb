@@ -22,8 +22,6 @@ axios.interceptors.response.use(res => {
   console.log('[#] 得到一个响应')
   if (res.data.ok && res.data.reason) {
     message.success(res.data.reason)
-  } else if (res.data.redirect) {
-    location.href = '/login'
   }
   NProgress.done()
   return res.data

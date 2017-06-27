@@ -9,6 +9,7 @@ import Login from '@pages/Login'
 import Register from '@pages/Register'
 import Software from '@pages/records/Software'
 import NodeModule from '@pages/records/NodeModule'
+import NodeCategory from '@pages/records/NodeCategory'
 
 
 export default [
@@ -50,6 +51,10 @@ export default [
       {
         path: '/home/record/module',
         component: NodeModule
+      },
+      {
+        path: '/home/record/moduleCat',
+        component: NodeCategory
       }
     ]
   },
