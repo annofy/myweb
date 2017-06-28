@@ -1,5 +1,5 @@
 const mongoose = require('mongoose'),
-  UserSchema = require('../schemas/User'),
-  UserModel = mongoose.model('user', UserSchema);
+  Schemas = require('../schemas/Schemas'),
+  UserModel = mongoose.model('user', Schemas.User);
 
 module.exports = UserModel;

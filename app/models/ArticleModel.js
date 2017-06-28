@@ -1,6 +1,6 @@
 const mongoose = require('mongoose'),
-  ArticleSchema = require('../schemas/Article'),
-  ArticleModel = mongoose.model('article', ArticleSchema);
+  Schema = require('../schemas/Schemas'),
+  ArticleModel = mongoose.model('article', Schema.Article);
 
 
 module.exports = ArticleModel;

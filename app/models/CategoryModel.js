@@ -1,5 +1,5 @@
 const mongoose = require('mongoose'),
-  CategorySchema = require('../schemas/Category'),
-  CategoryModel = mongoose.model('category', CategorySchema);
+  Schemas = require('../schemas/Schemas'),
+  CategoryModel = mongoose.model('category', Schemas.Category);
 
 module.exports = CategoryModel
