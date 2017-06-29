@@ -1,21 +1,12 @@
 /**
  *  creator: zheng
- *  date: 2017/6/21
+ *  date: 2017/6/28
  *  email: zhenglfsir@gmail.com
  */
-
 const mongoose = require('mongoose'),
   Schema = mongoose.Schema,
-  ModulesScheam = new Schema({
-    moduleName: String,
-    moduleDes: String,
-    developer: String,
-    npmUrl: String,
-    github: String,
-    isAvailable: {
-      type: Boolean,
-      default: true
-    },
+  EntitySchema = Schema({
+    name: String,
     createTime: {
       type: Date,
       default: Date.now
@@ -25,3 +16,12 @@ const mongoose = require('mongoose'),
       default: Date.now
     }
   });
+
+class Entity {
+  static getEntities() {
+  }
+}
+
+EntitySchema.loadClass(Entity)
+
+module.exports = EntitySchema

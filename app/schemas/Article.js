@@ -20,18 +20,15 @@ const mongoose = require('mongoose'),
       type: Number,
       default: 0
     },
-    meta: {
-      createTime: {
-        type: Date,
-        default: Date.now
-      },
-      updateTime: {
-        type: Date,
-        default: Date.now
-      }
+    createTime: {
+      type: Date,
+      default: Date.now
+    },
+    updateTime: {
+      type: Date,
+      default: Date.now
     }
-  })
-;
+  });
 
 class Article {
 

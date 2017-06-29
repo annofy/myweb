@@ -4,12 +4,12 @@ import ArticleEdit from '@pages/articles/ArticleEdit'
 import ArticleDetail from '@pages/articles/ArticleDetail'
 import Category from '@pages/category/Category'
 import CategoryEdit from '@pages/category/CategoryEdit'
+import Entity from '@pages/category/Entity'
 import Expe from '@pages/experience/Expe'
 import Login from '@pages/Login'
 import Register from '@pages/Register'
 import Software from '@pages/records/Software'
 import NodeModule from '@pages/records/NodeModule'
-import NodeCategory from '@pages/records/NodeCategory'
 
 
 export default [
@@ -37,8 +37,11 @@ export default [
       },
       {
         path: '/home/category',
-        exect: true,
         component: Category
+      },
+      {
+        path: '/home/entity',
+        component: Entity
       },
       {
         path: '/home/category/edit',
@@ -52,10 +55,6 @@ export default [
         path: '/home/record/module',
         component: NodeModule
       },
-      {
-        path: '/home/record/moduleCat',
-        component: NodeCategory
-      }
     ]
   },
   {

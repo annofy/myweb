@@ -9,7 +9,8 @@ const Category = require('./Category')
 const Modules = require('./Modules')
 const Soft = require('./Soft')
 const User = require('./User')
+const Entity = require('./Entity')
 
 module.exports = {
-  Article, Category, Modules, Soft, User
+  Article, Category, Modules, Soft, User, Entity
 }

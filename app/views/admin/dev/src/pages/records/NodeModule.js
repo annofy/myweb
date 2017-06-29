@@ -42,14 +42,14 @@ export default class NodeModule extends React.Component {
         },
         {
           title: '创建时间',
-          dataIndex: 'meta.createTime',
+          dataIndex: 'createTime',
           render(text) {
             return <span>{moment(text).format(process.env.formatText)}</span>
           }
         },
         {
           title: '更新时间',
-          dataIndex: 'meta.updateTime',
+          dataIndex: 'updateTime',
           render(text) {
             return <span>{moment(text).format(process.env.formatText)}</span>
           }
@@ -77,7 +77,9 @@ export default class NodeModule extends React.Component {
             <SearchBarForm fields={[{label: '名字', fieldName: 'moduleName'}]}>
               <TextBtn text="记录模块"/>
               <TextBtn text="删除"/>
-              <TextBtn text="管理分类" onClick={() => {this.props.history.push('/home/record/moduleCat')}}/>
+              <TextBtn text="管理分类" onClick={() => {
+                this.props.history.push('/home/record/moduleCat')
+              }}/>
               <TextBtn text="指定分类"/>
             </SearchBarForm>
           </FuncTable>

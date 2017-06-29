@@ -60,12 +60,19 @@ export default class Main extends React.Component {
               <Icon type="upload"/>
               <span className="nav-text">图片</span>
             </Menu.Item>
-            <Menu.Item>
-              <Link to="/home/category">
-                <Icon type="tags-o"/>
-                <span className="nav-text">类别</span>
-              </Link>
-            </Menu.Item>
+            <Menu.SubMenu key="sub3"
+                          title={<span><Icon type="tags-o"></Icon><span className="nav-text">分类</span></span>}>
+              <Menu.Item>
+                <Link to="/home/category">
+                  <span className="nav-text">类别</span>
+                </Link>
+              </Menu.Item>
+              <Menu.Item>
+                <Link to="/home/entity">
+                  <span className="nav-text">实体</span>
+                </Link>
+              </Menu.Item>
+            </Menu.SubMenu>
           </Menu>
         </Sider>
         <Layout>

@@ -18,14 +18,14 @@ export default class Category extends React.Component {
       }, {
         title: '创建时间',
         key: 'createTime',
-        dataIndex: 'meta.createTime',
+        dataIndex: 'createTime',
         render: (text, data) => {
           return <span>{moment(text).format(process.env.formatText)}</span>
         }
       }, {
         title: '更新时间',
         key: 'updateTime',
-        dataIndex: 'meta.updateTime',
+        dataIndex: 'updateTime',
         render: (text, data) => {
           return <span>{moment(text).format(process.env.formatText)}</span>
         }

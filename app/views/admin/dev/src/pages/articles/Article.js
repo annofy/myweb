@@ -38,13 +38,13 @@ export default class Articles extends React.Component {
         }
       }, {
         title: '发布时间',
-        dataIndex: 'meta.createTime',
+        dataIndex: 'createTime',
         render(text, data) {
           return <span>{moment(text).format(process.env.formatText)}</span>
         }
       }, {
         title: '更新时间',
-        dataIndex: 'meta.updateTime',
+        dataIndex: 'updateTime',
         render(text, data) {
           return <span>{moment(text).format(process.env.formatText)}</span>
         }

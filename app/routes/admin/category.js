@@ -6,6 +6,7 @@ router.get('/', (req, res) => {
   let start = req.query.start - 0,
     pageSize = req.query.pageSize - 0;
   Category.getCatetories(start, pageSize).then(cates => {
+    console.log(cates)
     res.json({
       ok: true,
       data: cates,

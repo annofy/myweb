@@ -5,3 +5,6 @@ package-lock.json
 .idea/inspectionProfiles/*
 .idea/dictionaries/*
 .DS_Store
+static/libs/**
+app/logs/
+static/uploads/

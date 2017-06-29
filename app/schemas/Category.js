@@ -3,15 +3,17 @@ const mongoose = require('mongoose'),
   CategorySchema = new Schema({
     name: String,
     desc: String,
-    meta: {
-      createTime: {
-        type: Date,
-        default: Date.now
-      },
-      updateTime: {
-        type: Date,
-        default: Date.now
-      }
+    entity: {
+      type: Schema.Types.ObjectId,
+      ref: 'entity'
+    },
+    createTime: {
+      type: Date,
+      default: Date.now
+    },
+    updateTime: {
+      type: Date,
+      default: Date.now
     }
   });
 

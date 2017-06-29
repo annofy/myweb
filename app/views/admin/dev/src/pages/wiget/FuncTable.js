@@ -15,11 +15,19 @@ const default_pagination = {
 }
 const default_table = {
   size: 'default',
-  loading: true,
   rowKey: '_id'
 }
 
 export default class FuncTable extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      tableOptions: {
+        loading: true
+      }
+    }
+  }
 
   get rowSelection() {
     return {...default_row_selection, ...this.props.rowSelection}
@@ -30,11 +38,21 @@ export default class FuncTable extends React.Component {
   }
 
   get tableOptions() {
-    return {...default_table, ...this.props.tableOptions}
+    return {...default_table, ...this.state.tableOptions, ...this.props.tableOptions}
   }
 
   get hasSearch() {
     return this.props.hasSearch
+  }
+
+  componentDidMount() {
+    if (this.props.data.length === 0) {
+      this.setState({
+        tableOptions: {
+          loading: false
+        }
+      })
+    }
   }
 
   render() {
