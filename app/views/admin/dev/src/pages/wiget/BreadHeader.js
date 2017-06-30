@@ -6,6 +6,7 @@
  */
 import React from 'react'
 import {Breadcrumb, Icon} from 'antd'
+import BreadItem from './BreadItem'
 const {Item} = Breadcrumb
 
 export default class BreadHeader extends React.Component {
