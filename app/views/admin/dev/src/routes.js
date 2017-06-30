@@ -29,30 +29,37 @@ export default [
       },
       {
         path: '/home/article/edit',
+        exect: true,
         component: ArticleEdit
       },
       {
         path: '/home/article/detail',
+        exect: true,
         component: ArticleDetail
       },
       {
         path: '/home/category',
+        exect: true,
         component: Category
       },
       {
         path: '/home/entity',
+        exect: true,
         component: Entity
       },
       {
         path: '/home/category/edit',
+        exect: true,
         component: CategoryEdit
       },
       {
         path: '/home/record/soft',
+        exect: true,
         component: Software
       },
       {
         path: '/home/record/module',
+        exect: true,
         component: NodeModule
       },
     ]

@@ -4,13 +4,13 @@ const express = require('express'),
 
 router.get('/login', (req, res) => {
   if (req.session && req.session._uname) {
-    res.json({
+    return res.json({
       ok: true,
       data: {},
       reason: '用户已登录'
     })
   } else {
-    res.json({
+    return res.json({
       ok: false,
       data: {},
       reason: ''

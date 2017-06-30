@@ -1,6 +1,6 @@
 const mongoose = require('mongoose'),
   Schema = mongoose.Schema,
-  ArticleSchema = Schema({
+  ArticleSchema = new Schema({
     title: {
       type: String,
       trim: true,

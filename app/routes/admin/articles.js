@@ -26,7 +26,6 @@ router.post('/', (req, res) => {
     categoryId: [ '59429635871dde77507e9a42', '593ffaec952a403cf95f1fb6' ],
     desc: '432432' }
    */
-  console.log(body)
   Article.addArtcile(body)
     .then(result => {
       res.json({

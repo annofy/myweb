@@ -20,6 +20,7 @@ const mongoose = require('mongoose'),
 class Category {
   static getCatetories(start = 0, pageSize = 10) {
     return this.find()
+      .populate('entity')
       .skip(start * pageSize)
       .limit(pageSize)
       .catch(err => {
@@ -61,6 +62,13 @@ class Category {
         throw new Error('获取类目详情失败', err)
       })
   }
+
+  static getCategoriesByEntity(eid) {
+    return this.find({entity: eid})
+      .catch(err => {
+        throw new Error(err)
+      })
+  }
 }
 
 CategorySchema.loadClass(Category)
@@ -69,10 +77,7 @@ CategorySchema.pre('save', function (next) {
 })
 
 CategorySchema.pre('update', function (next) {
-  this.findOne().then(res => {
-    this.update({}, {$set: {meta: {...res.meta, updateTime: Date.now()}}})
-    next()
-  })
+  next()
 })
 
 

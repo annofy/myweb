@@ -5,8 +5,9 @@
  */
 const mongoose = require('mongoose'),
   Schema = mongoose.Schema,
-  EntitySchema = Schema({
+  EntitySchema = new Schema({
     name: String,
+    desc: String,
     createTime: {
       type: Date,
       default: Date.now
@@ -17,10 +18,23 @@ const mongoose = require('mongoose'),
     }
   });
 
+
 class Entity {
   static getEntities() {
+    return this.find()
+      .catch(err => {
+        throw new Error('查询实体失败', err)
+      })
+  }
+
+  static addEntity(entity) {
+    return this.create(entity)
+      .catch(err => {
+        throw new Error('创建实体失败', err)
+      })
   }
 }
+
 
 EntitySchema.loadClass(Entity)
 

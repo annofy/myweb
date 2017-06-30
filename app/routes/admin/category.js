@@ -6,7 +6,6 @@ router.get('/', (req, res) => {
   let start = req.query.start - 0,
     pageSize = req.query.pageSize - 0;
   Category.getCatetories(start, pageSize).then(cates => {
-    console.log(cates)
     res.json({
       ok: true,
       data: cates,
@@ -41,8 +40,8 @@ router.get('/validate', (req, res) => {
 
 router.post('/edit', (req, res) => {
   let body = req.body,
-    {name, desc} = body;
-  Category.updateCategory(body._id, {name, desc})
+    {name, entity, desc} = body;
+  Category.updateCategory(body._id, {name, desc, entity})
     .then(result => {
       res.json({
         ok: true,
@@ -51,6 +50,7 @@ router.post('/edit', (req, res) => {
       })
     })
 })
+
 
 router.post('/delete', (req, res) => {
   let ids = req.body.ids ? req.body.ids : []

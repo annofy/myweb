@@ -7,13 +7,17 @@
 import React from 'react'
 import {Modal, Form, Input} from 'antd'
 const FormItem = Form.Item
+const formItemLayout = {
+  labelCol: {span: 6},
+  wrapperCol: {span: 12},
+};
 
 class FormDialog extends React.Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      loading: false,
+      loading: false
     }
   }
 
@@ -25,23 +29,27 @@ class FormDialog extends React.Component {
         break;
       case 'select':
         break;
+      case 'textarea':
+        return <Input type="textarea" {...field.attr}/>
+        break;
       default:
-        return <Input placeholder={field.attr.placeholder}/>
+        return <Input {...field.attr}/>
         break;
     }
   }
 
 
   handleOk() {
-    this.setState({
-      loading: true
-    })
     this.props.form.validateFields((errs, form) => {
       if (!errs) {
+        this.setState({
+          loading: true
+        })
         axios.post(this.props.submitUrl, form)
           .then(res => {
             if (res.ok) {
               this.handleCancel()
+              this.props.onSubmited && this.props.onSubmited()
             }
           })
       }
@@ -49,22 +57,27 @@ class FormDialog extends React.Component {
   }
 
   handleCancel() {
-    this.props.onClose();
-    this.props.form.resetFields()
+    this.props.onClose && this.props.onClose();
+  }
+
+  componentDidMount() {
+    this.props.fieldsValue && this.props.form.setFields(this.props.fieldsValue)
   }
 
   render() {
     const {getFieldDecorator} = this.props.form
     return (
-      <Modal ref={modal => this.modal = modal} title={this.props.title} visible={this.props.show}
+      <Modal key={this.props.key} ref={modal => this.modal = modal} title={this.props.title} visible={this.props.show}
              onOk={this.handleOk.bind(this)}
              onCancel={this.handleCancel.bind(this)} confirmLoading={this.state.loading}>
-        <Form>
+        <Form layout="horizontal">
           {
-            this.props.fileds && this.props.fileds.map((field, index) => <FormItem key={index} label={field.label}>
+            this.props.fields && this.props.fields.map((field, index) => <FormItem {...formItemLayout} key={index}
+                                                                                   label={field.label}>
               {
                 getFieldDecorator(field.name, {
-                  rules: field.rules
+                  rules: field.rules,
+                  initialValue: field.value
                 })(this.typeField(field))
               }
             </FormItem>)
@@ -89,10 +102,13 @@ FormDialog.propsType = {
         })
       ),
       type: PropTypes.string,
-      attr: PropTypes.object
+      attr: PropTypes.object,
     }),
   ),
-  submitUrl: PropTypes.string.isRequired
+  submitUrl: PropTypes.string.isRequired,
+  onClose: PropTypes.func,
+  onSubmited: PropTypes.func,
+  key: PropTypes.string
 }
 
 FormDialog.defaultProps = {

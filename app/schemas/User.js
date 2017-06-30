@@ -1,7 +1,7 @@
 const mongoose = require('mongoose'),
   Schema = mongoose.Schema,
   utils = require('../utils/utils'),
-  UserSchema = Schema({
+  UserSchema = new Schema({
     name: String,
     password: String,
     lastLogin: {

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Breadcrumb, Icon, Form, Input, Button} from 'antd'
+import {Breadcrumb, Icon, Form, Input, Button, Select} from 'antd'
 import {Link} from 'react-router-dom'
 import MainContent from '@pages/wiget/MainContent'
 
@@ -15,6 +15,13 @@ const formTailLayout = {
 let timeout;
 
 class CategoryEdit extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      entities: []
+    }
+  }
 
   handleSubmit() {
     const {history} = this.props
@@ -48,9 +55,26 @@ class CategoryEdit extends React.Component {
     const {state} = this.props.location
     if (state && state.action === 'edit') {
       this.category = state.data
-      this.props.form.setFieldsValue({name: state.data.name})
-      this.props.form.setFieldsValue({desc: state.data.desc})
+      this.props.form.setFields({
+        name: {
+          value: state.data.name
+        },
+        desc: {
+          value: state.data.desc
+        },
+        entity: {
+          value: state.data.entity._id
+        }
+      })
     }
+    axios.get('/admin/entity')
+      .then(res => {
+        if (res.ok) {
+          this.setState({
+            entities: res.data
+          })
+        }
+      })
   }
 
   get optBtn() {
@@ -61,6 +85,7 @@ class CategoryEdit extends React.Component {
   }
 
   render() {
+    const {state} = this.props.location;
     const {getFieldDecorator} = this.props.form
     return (
       <div>
@@ -82,6 +107,9 @@ class CategoryEdit extends React.Component {
                     required: true,
                     whitespace: true,
                     validator: (rule, value, callback) => {
+                      if (state && state.action === 'edit') {
+                        return callback()
+                      }
                       // 简单防抖动
                       if (timeout) {
                         clearTimeout(timeout)
@@ -95,19 +123,36 @@ class CategoryEdit extends React.Component {
                             }
                           }).then(res => {
                             if (res.ok && res.data) {
-                              callback(new Error('名称已存在,换个名字呗'))
+                              return callback(new Error('名称已存在,换个名字呗'))
                             } else {
-                              callback()
+                              return callback()
                             }
                           })
                         } else {
-                          callback(new Error('不能为空'))
+                          return callback(new Error('不能为空'))
                         }
                       }, 300)
                     }
                   }]
                 })(
                   <Input placeholder="名称"/>
+                )
+              }
+            </FormItem>
+            <FormItem {...formItemLayout} label="实体">
+              {
+                getFieldDecorator('entity', {
+                  rules: [{
+                    required: true,
+                    message: '请选择实体分类'
+                  }]
+                })(
+                  <Select>
+                    {
+                      this.state.entities.map((en, index) => <Select.Option key={index}
+                                                                            value={en._id}>{en.name}</Select.Option>)
+                    }
+                  </Select>
                 )
               }
             </FormItem>

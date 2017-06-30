@@ -23,6 +23,9 @@ axios.interceptors.response.use(res => {
   if (res.data.ok && res.data.reason) {
     message.success(res.data.reason)
   }
+  if (!res.data.ok && res.data.redirect) {
+    location.href = '/login'
+  }
   NProgress.done()
   return res.data
 }, err => {
