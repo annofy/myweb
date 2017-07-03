@@ -66,7 +66,7 @@ export default class Category extends React.Component {
       this.setState({
         data: dataSource
       })
-    }}/></span>, 10, () => {
+    }}/></span>, 5, () => {
       this.deleteAction(data._id)
       message.destroy()
     })
@@ -76,7 +76,7 @@ export default class Category extends React.Component {
     if (Object.prototype.toString.apply(params) === '[object String]') {
       params = [params]
     }
-    axios.post('/admin/category/delete', {ids: params})
+    axios.delete('/admin/category', {ids: params})
       .then(res => {
         if (res.ok && this.hide) {
           this.fetchList()

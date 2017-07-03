@@ -26,6 +26,18 @@ router.post('/', (req, res) => {
     })
 })
 
+router.delete('/', (req, res) => {
+  let ids = req.body.ids ? req.body.ids : []
+  Category.deleteCategory(ids)
+    .then(flag => {
+      res.json({
+        ok: true,
+        data: {},
+        reason: '删除成功'
+      })
+    })
+})
+
 router.get('/validate', (req, res) => {
   let name = req.query.name
   Category.getCategoryByName(name)
@@ -38,7 +50,7 @@ router.get('/validate', (req, res) => {
     })
 })
 
-router.post('/edit', (req, res) => {
+router.put('/', (req, res) => {
   let body = req.body,
     {name, entity, desc} = body;
   Category.updateCategory(body._id, {name, desc, entity})
@@ -51,17 +63,5 @@ router.post('/edit', (req, res) => {
     })
 })
 
-
-router.post('/delete', (req, res) => {
-  let ids = req.body.ids ? req.body.ids : []
-  Category.deleteCategory(ids)
-    .then(flag => {
-      res.json({
-        ok: true,
-        data: {},
-        reason: '删除成功'
-      })
-    })
-})
 
 module.exports = router
