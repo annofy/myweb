@@ -145,7 +145,7 @@ export default class Entity extends React.Component {
             <TextBtn text="删除" onClick={this.handleRemove.bind(this)}/>
           </FuncTable>
         </MainContent>
-        <FormDialog key={Math.random()} submitUrl={this.state.submitUrl} title="增加实体" show={this.state.show}
+        <FormDialog submitUrl={this.state.submitUrl} title="增加实体" show={this.state.show}
                     fields={this.state.fields}
                     fieldsValue={this.state.fieldsValue}
                     onClose={this.handleClose.bind(this)} onSubmited={this.handleSubmited.bind(this)}/>
